@@ -6,9 +6,7 @@ export class ProductsService {
     throw new InternalServerErrorException('listProducts not implemented');
   }
   getProduct(productId: number) {
-    throw new InternalServerErrorException(
-      `getProduct not implemented for product ${productId}`,
-    );
+    throw new InternalServerErrorException(`getProduct not implemented for product ${productId}`);
   }
   createProduct() {
     throw new InternalServerErrorException('createProduct not implemented');

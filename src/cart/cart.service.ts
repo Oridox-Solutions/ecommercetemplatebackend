@@ -9,13 +9,9 @@ export class CartService {
     throw new InternalServerErrorException('addToCart not implemented');
   }
   updateCartItem(itemId: number) {
-    throw new InternalServerErrorException(
-      `updateCartItem not implemented for item ${itemId}`,
-    );
+    throw new InternalServerErrorException(`updateCartItem not implemented for item ${itemId}`);
   }
   removeFromCart(itemId: number) {
-    throw new InternalServerErrorException(
-      `removeFromCart not implemented for item ${itemId}`,
-    );
+    throw new InternalServerErrorException(`removeFromCart not implemented for item ${itemId}`);
   }
 }
