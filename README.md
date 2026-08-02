@@ -173,14 +173,4 @@ Exit PostgreSQL:
 \q
 ```
 
-## Path aliases
-
-The backend uses `@` as an alias for the `src` directory.
-
-Example:
-
-```ts
-import { Component } from "@/components/Component";
-```
-
 ## License
