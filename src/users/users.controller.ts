@@ -30,10 +30,7 @@ export class UsersController {
   }
 
   @Put(':user_id')
-  updateUser(
-    @Param('user_id', ParseIntPipe) userId: number,
-    @Body() updateUserDto: UpdateUserDto,
-  ) {
+  updateUser(@Param('user_id', ParseIntPipe) userId: number, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.updateUser(userId, updateUserDto);
   }
 

@@ -13,9 +13,7 @@ export class OptionalAuthGuard implements CanActivate {
     if (token) {
       try {
         req.user = await this.jwtService.verifyAsync(token);
-      } catch {
-        
-      }
+      } catch {}
     }
     return true;
   }
