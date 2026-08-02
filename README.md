@@ -184,10 +184,3 @@ import { Component } from "@/components/Component";
 ```
 
 ## License
-
-
-# ecommercetemplatebackend
-
-Repo for ecommerce template site backend
-=======
-Private repository.
