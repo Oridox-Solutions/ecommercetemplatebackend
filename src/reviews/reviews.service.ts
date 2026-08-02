@@ -2,16 +2,16 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
 @Injectable()
 export class ReviewsService {
-  getReviewsForProduct(productId: string) {
+  getReviewsForProduct(productId: number) {
     throw new InternalServerErrorException('Not implemented');
   }
-  createReview(productId: string) {
+  createReview(productId: number) {
     throw new InternalServerErrorException('Not implemented');
   }
-  updateReview(reviewId: string) {
+  updateReview(reviewId: number) {
     throw new InternalServerErrorException('Not implemented');
   }
-  deleteReview(reviewId: string) {
+  deleteReview(reviewId: number) {
     throw new InternalServerErrorException('Not implemented');
   }
 }

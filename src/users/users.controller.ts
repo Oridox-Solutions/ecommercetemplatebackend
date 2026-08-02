@@ -2,12 +2,16 @@ import {
   Controller,
   Get,
   Put,
+  Post,
   Delete,
   Param,
   UseGuards,
   ParseIntPipe,
+  Body,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { UpdateUserDto } from './dto/updateUser.dto';
+import { CreateUserDto } from './dto/createUser.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -15,9 +19,9 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get()
-  listUsers() {
-    return this.usersService.listUsers();
+  @Post('/users')
+  createUser(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.createUser(createUserDto);
   }
 
   @Get(':user_id')
@@ -26,8 +30,11 @@ export class UsersController {
   }
 
   @Put(':user_id')
-  updateUser(@Param('user_id', ParseIntPipe) userId: number) {
-    return this.usersService.updateUser(userId);
+  updateUser(
+    @Param('user_id', ParseIntPipe) userId: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return this.usersService.updateUser(userId, updateUserDto);
   }
 
   @Delete(':user_id')
