@@ -1,0 +1,27 @@
+name: Backend CI 
+
+on: 
+  push: 
+    branches: 
+      - main 
+
+  pull_requests: 
+    branches: 
+      - main 
+
+  workflow_dispatch: 
+
+persmissions: 
+  contents: read 
+
+jobs: 
+  workflow_check: 
+    name: Backend workflow check 
+    runs-on: ubuntu-latest 
+
+    steps: 
+      - name: Check out repository 
+        uses: actions/checkout@v4 
+
+      - name: Confirm workflow is running 
+        run: echo "Backend Github Actions workflow is running successfully."
