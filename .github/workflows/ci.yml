@@ -41,6 +41,9 @@ jobs:
       - name: Run automated tests 
         run: npm test 
 
+      - name: Validate backend build 
+        run: npm run build
+
       - name: Build
         run: npm run build
 
