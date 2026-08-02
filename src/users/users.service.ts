@@ -5,18 +5,27 @@ import { UpdateUserDto } from './dto/updateUser.dto';
 @Injectable()
 export class UsersService {
   createUser(createUserDto: CreateUserDto) {
-    throw new InternalServerErrorException('Not implemented');
+    void createUserDto;
+    throw new InternalServerErrorException('createUser not implemented');
   }
 
   getUser(userId: number) {
-    throw new InternalServerErrorException('Not implemented');
+    console.log(`Fetching user with ID: ${userId}`);
+    throw new InternalServerErrorException(
+      `getUser not implemented for user ${userId}`,
+    );
   }
 
   updateUser(userId: number, updateUserDto: UpdateUserDto) {
-    throw new InternalServerErrorException('Not implemented');
+    void updateUserDto;
+    throw new InternalServerErrorException(
+      `updateUser not implemented for user ${userId}`,
+    );
   }
 
   deleteUser(userId: number) {
-    throw new InternalServerErrorException('Not implemented');
+    throw new InternalServerErrorException(
+      `deleteUser not implemented for user ${userId}`,
+    );
   }
 }
