@@ -18,44 +18,34 @@ permissions:
 
 jobs:
   workflow_check:
-    name: Backend Workflow Check
+    name: Backend workflow check
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+      - name: Set up Node.js 
+        uses: actions/setup-node@v4 
+        with: 
+          node-version: 22 
+          cache: npm 
           cache-dependency-path: package-lock.json
 
-      - name: 📦 Install Dependencies
-        run: npm ci
+      - name: Install depenencies 
+        run: npm ci 
 
-      - name: 🔍 Lint
+      - name: Lint
         run: npm run lint
 
-      - name: ❌ Lint Failed
-        if: failure()
-        run: echo "Lint step failed. Fix lint errors before merging."
+      - name: Run automated tests 
+        run: npm test 
 
-      - name: 🏗️ Build
+      - name: Validate backend build 
         run: npm run build
 
-      - name: ❌ Build Failed
-        if: failure()
-        run: echo "Build step failed. Check the build output above."
+      - name: Build
+        run: npm run build
 
-      - name: 🧪 Test
-        run: npm test
-
-      - name: ❌ Tests Failed
-        if: failure()
-        run: echo "Test step failed. Check the test output above."
-
-      - name: ✅ Success
-        if: success()
-        run: echo "Backend Github Actions Workflow passed all checks."
+      - name: Confirm workflow is running 
+        run: echo "Backend Github Actions workflow is running successfully."
