@@ -10,6 +10,15 @@ async function bootstrap() {
     .setTitle('Oridox E-Commerce API')
     .setDescription('API documentation for the Oridox E-Commerce backend.')
     .setVersion('1.0')
+    .addBearerAuth (
+      {
+        type: 'http', 
+        scheme: 'bearer', 
+        bearerFormat: 'JWT', 
+        description: 'Enter JWT access token', 
+      }, 
+      'JWT-auth', 
+    )
     .build(); 
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig); 
