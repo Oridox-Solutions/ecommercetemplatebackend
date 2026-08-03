@@ -146,16 +146,60 @@ docker compose up -d
 
 The PostgreSQL database container is created automatically by Docker using the values defined in `.env`.
 
-After starting the database, apply Prisma migrations to create the database schema:
+## Prisma
 
-```bash
-npx prisma migrate dev
-```
+The project uses Prisma as the ORM for interacting with the PostgreSQL database.
 
-Generate the Prisma client:
+### Generate Prisma Client
+
+Generate the Prisma client after installing dependencies or whenever `schema.prisma` changes:
 
 ```bash
 npx prisma generate
+```
+
+### Create a Migration
+
+Create a new migration after modifying the Prisma schema:
+
+```bash
+npx prisma migrate dev --name <migration_name>
+```
+
+Example:
+
+```bash
+npx prisma migrate dev --name add_product_table
+```
+
+### Apply Existing Migrations
+
+Apply all existing migrations to your local database:
+
+```bash
+npx prisma migrate deploy
+```
+
+### Check Migration Status
+
+```bash
+npx prisma migrate status
+```
+
+### Reset the Database
+
+Deletes all data and reapplies every migration.
+
+```bash
+npx prisma migrate reset
+```
+
+### Open Prisma Studio
+
+Browse and edit database records in a web interface.
+
+```bash
+npx prisma studio
 ```
 
 ## Useful Docker Commands
