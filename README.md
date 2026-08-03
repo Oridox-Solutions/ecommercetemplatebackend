@@ -9,12 +9,15 @@ Backend application for the Oridox E-Commerce Template.
 - Docker
 - ESLint
 - Prettier
+- PostgreSQL
+- Typescript
 
 ## Requirements
 
 - Node.js 22+
 - NPM
-- NEST
+- NESTJS CLI
+- Docker
 
 ## Installation
 
@@ -25,7 +28,7 @@ npm install
 ## Development
 
 ```bash
-npm start
+npm run start:dev
 ```
 
 ## Build
@@ -60,13 +63,27 @@ src/
 ├── auth/
 ├── cart/
 ├── categories/
+├── common/
+├── health/
 ├── orders/
+├── prisma/
 ├── products/
 ├── reviews/
-└── users/
-app.module.ts
-main.ts
+├── users/
+├── types/
+├── app.module.ts
+└── main.ts
 ```
+
+## API
+
+Backend runs on:
+
+http://localhost:3000
+
+Health check:
+
+GET /health
 
 ## Dependency Management
 
@@ -127,7 +144,19 @@ docker compose down -v
 docker compose up -d
 ```
 
-The development database is created automatically on first startup using the values defined in `.env`.
+The PostgreSQL database container is created automatically by Docker using the values defined in `.env`.
+
+After starting the database, apply Prisma migrations to create the database schema:
+
+```bash
+npx prisma migrate dev
+```
+
+Generate the Prisma client:
+
+```bash
+npx prisma generate
+```
 
 ## Useful Docker Commands
 
