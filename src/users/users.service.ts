@@ -1,12 +1,28 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
+import { PrismaService } from '../prisma/prisma.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  createUser(createUserDto: CreateUserDto) {
-    void createUserDto;
-    throw new InternalServerErrorException('createUser not implemented');
+  constructor(private prisma: PrismaService) {}
+
+  async createUser(createUserDto: CreateUserDto) {
+    const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+
+    const user = await this.prisma.user.create({
+      data: {
+        email: createUserDto.email,
+        password: hashedPassword,
+        firstName: createUserDto.firstName,
+        lastName: createUserDto.lastName,
+      },
+    });
+
+    const { password, ...result } = user;
+    void password;
+    return result;
   }
 
   getUser(userId: number) {
