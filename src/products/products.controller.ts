@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseGuards, ParseIntPipe } fr
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ProductsService } from './products.service';
 
-@Controller('products')
+@Controller('product')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
@@ -11,8 +11,8 @@ export class ProductsController {
     return this.productsService.listProducts();
   }
 
-  @Get(':product_id')
-  getProduct(@Param('product_id', ParseIntPipe) productId: number) {
+  @Get(':id')
+  getProduct(@Param('id', ParseIntPipe) productId: number) {
     return this.productsService.getProduct(productId);
   }
 
@@ -22,15 +22,15 @@ export class ProductsController {
     return this.productsService.createProduct();
   }
 
-  @Put(':product_id')
+  @Put(':id')
   @UseGuards(JwtAuthGuard)
-  updateProduct(@Param('product_id', ParseIntPipe) productId: number) {
+  updateProduct(@Param('id', ParseIntPipe) productId: number) {
     return this.productsService.updateProduct(productId);
   }
 
-  @Delete(':product_id')
+  @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  deleteProduct(@Param('product_id', ParseIntPipe) productId: number) {
+  deleteProduct(@Param('id', ParseIntPipe) productId: number) {
     return this.productsService.deleteProduct(productId);
   }
 }

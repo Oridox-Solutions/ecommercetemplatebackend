@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Param, UseGuards, ParseIntPipe } from '@nes
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { OrdersService } from './orders.service';
 
-@Controller('orders')
+@Controller('order')
 @UseGuards(JwtAuthGuard)
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
@@ -12,18 +12,18 @@ export class OrdersController {
     return this.ordersService.listOrders();
   }
 
-  @Get(':order_id')
-  getOrder(@Param('order_id', ParseIntPipe) orderId: number) {
-    return this.ordersService.getOrder(orderId);
-  }
-
   @Post()
   createOrder() {
     return this.ordersService.createOrder();
   }
 
-  @Put(':order_id')
-  updateOrderStatus(@Param('order_id', ParseIntPipe) orderId: number) {
+  @Get(':id')
+  getOrder(@Param('id', ParseIntPipe) orderId: number) {
+    return this.ordersService.getOrder(orderId);
+  }
+
+  @Put(':id')
+  updateOrderStatus(@Param('id', ParseIntPipe) orderId: number) {
     return this.ordersService.updateOrderStatus(orderId);
   }
 }

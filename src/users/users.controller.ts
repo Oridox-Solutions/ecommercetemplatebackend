@@ -5,15 +5,19 @@ import {
   Post,
   Delete,
   Param,
+  Body,
+  Req,
   UseGuards,
   ParseIntPipe,
-  Body,
 } from '@nestjs/common';
+import type { Request } from 'express';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UsersService } from './users.service';
 
+@ApiTags('users')
 @Controller('user')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -24,20 +28,30 @@ export class UsersController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get(':user_id')
-  getUser(@Param('user_id', ParseIntPipe) userId: number) {
-    return this.usersService.getUser(userId);
+  @ApiBearerAuth('JWT-auth')
+  @Get(':id')
+  getUser(@Req() req: Request, @Param('id', ParseIntPipe) userId: number) {
+    const reqId = req.user!.sub;
+    return this.usersService.getUser(userId, reqId);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put(':user_id')
-  updateUser(@Param('user_id', ParseIntPipe) userId: number, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.updateUser(userId, updateUserDto);
+  @ApiBearerAuth('JWT-auth')
+  @Put(':id')
+  updateUser(
+    @Req() req: Request,
+    @Param('id', ParseIntPipe) userId: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    const reqId = req.user!.sub;
+    return this.usersService.updateUser(userId, reqId, updateUserDto);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete(':user_id')
-  deleteUser(@Param('user_id', ParseIntPipe) userId: number) {
-    return this.usersService.deleteUser(userId);
+  @ApiBearerAuth('JWT-auth')
+  @Delete(':id')
+  deleteUser(@Req() req: Request, @Param('id', ParseIntPipe) userId: number) {
+    const reqId = req.user!.sub;
+    return this.usersService.deleteUser(userId, reqId);
   }
 }

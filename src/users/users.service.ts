@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
+import { assertOwnerOrAdmin } from '../common/utilis/assert-owner.util';
 
 @Injectable()
 export class UsersService {
@@ -25,17 +26,20 @@ export class UsersService {
     return result;
   }
 
-  getUser(userId: number) {
+  getUser(userId: number, reqId: number) {
+    assertOwnerOrAdmin(reqId, userId, 'user', 'You can only access your own profile');
     console.log(`Fetching user with ID: ${userId}`);
     throw new InternalServerErrorException(`getUser not implemented for user ${userId}`);
   }
 
-  updateUser(userId: number, updateUserDto: UpdateUserDto) {
+  updateUser(userId: number, reqId: number, updateUserDto: UpdateUserDto) {
+    assertOwnerOrAdmin(reqId, userId, 'user', 'You can only update your own profile');
     void updateUserDto;
     throw new InternalServerErrorException(`updateUser not implemented for user ${userId}`);
   }
 
-  deleteUser(userId: number) {
+  deleteUser(userId: number, reqId: number) {
+    assertOwnerOrAdmin(reqId, userId, 'user', 'You can only delete your own profile');
     throw new InternalServerErrorException(`deleteUser not implemented for user ${userId}`);
   }
 }
