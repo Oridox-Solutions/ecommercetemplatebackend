@@ -179,9 +179,6 @@ Browse and edit database records in a web interface.
 npx prisma studio
 ```
 
-## License
-
-
 ## API Documentation
 
 This project uses **Swagger/OpenAPI** to provide interactive API documentation for the backend.
@@ -229,3 +226,5 @@ http://localhost:3000/api-json
 ```
 
 This JSON document is generated automatically from the application's controllers and Swagger decorators and can be used by tools that support the OpenAPI standard.
+
+## License
