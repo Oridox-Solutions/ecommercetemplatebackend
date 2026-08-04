@@ -1,7 +1,8 @@
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
 import { AppModule } from './app.module';
-import { Logger, ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 async function bootstrap() {
@@ -40,11 +41,14 @@ async function bootstrap() {
       .build();
 
     const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
+
     SwaggerModule.setup('api/docs', app, swaggerDocument);
   }
 
   const port = Number(process.env.PORT) || 3000;
+
   await app.listen(port);
   logger.log(`Server is running on http://localhost:${port}`);
 }
+
 void bootstrap();
