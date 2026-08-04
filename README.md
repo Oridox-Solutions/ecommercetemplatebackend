@@ -180,3 +180,52 @@ npx prisma studio
 ```
 
 ## License
+
+
+## API Documentation
+
+This project uses **Swagger/OpenAPI** to provide interactive API documentation for the backend.
+
+### Accessing the Documentation
+
+Start the development server:
+
+```bash
+npm run start:dev
+```
+
+Once the server is running, open:
+
+```
+http://localhost:3000/api/docs
+```
+
+This opens the Swagger UI, where all available API endpoints are automatically documented.
+
+### Features
+
+- Browse all available API endpoints.
+- View request methods, parameters and response codes.
+- Test endpoints directly from the browser using **Try it out**.
+- Documentation updates automatically as new controllers and endpoints are added.
+- JWT-protected endpoints are marked with a lock icon.
+
+### Authentication
+
+Some endpoints require authentication.
+
+1. Authenticate using the login endpoint to obtain a JWT access token.
+2. Click the **Authorize** button in the top-right corner of Swagger UI.
+3. Paste the JWT access token into the dialog.
+4. Click **Authorize**.
+5. Protected endpoints can now be tested directly from Swagger.
+
+### OpenAPI Specification
+
+The generated OpenAPI specification is available at:
+
+```
+http://localhost:3000/api-json
+```
+
+This JSON document is generated automatically from the application's controllers and Swagger decorators and can be used by tools that support the OpenAPI standard.

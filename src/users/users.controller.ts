@@ -12,7 +12,7 @@ import {
   MethodNotAllowedException,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiExcludeEndpoint, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import type { Request } from 'express';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -141,6 +141,8 @@ export class UsersController {
   }
 
   @All()
+  @ApiExcludeEndpoint()
+
   methodNotAllowed() {
     throw new MethodNotAllowedException(
       'This method is not supported on /user path. Please use the appropriate HTTP method.',
