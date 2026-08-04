@@ -7,6 +7,8 @@ import {
   Param,
   Body,
   Req,
+  All,
+  MethodNotAllowedException,
   UseGuards,
   ParseIntPipe,
 } from '@nestjs/common';
@@ -53,5 +55,12 @@ export class UsersController {
   deleteUser(@Req() req: Request, @Param('id', ParseIntPipe) userId: number) {
     const reqId = req.user!.sub;
     return this.usersService.deleteUser(userId, reqId);
+  }
+
+  @All()
+  methodNotAllowed() {
+    throw new MethodNotAllowedException(
+      'This method is not supported on /user path. Please use the appropriate HTTP method.',
+    );
   }
 }

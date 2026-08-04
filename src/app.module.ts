@@ -9,7 +9,6 @@ import { ReviewsModule } from './reviews/reviews.module';
 import { AdminModule } from './admin/admin.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { ApiKeyMiddleware } from './common/middleware/api-key.middleware';
-import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { PrismaModule } from './prisma/prisma.module';
 import { HealthModule } from './health/health.module';
 
@@ -30,7 +29,6 @@ import { HealthModule } from './health/health.module';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(ApiKeyMiddleware).forRoutes(UsersModule);
-    consumer.apply(HttpExceptionFilter).forRoutes('*');
     consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }
