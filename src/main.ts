@@ -6,8 +6,18 @@ import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 async function bootstrap() {
+  const validLogLevels = ['log', 'error', 'warn', 'debug', 'verbose'] as const;
+
+  const configuredLogLevel = process.env.LOG_LEVEL;
+
+  const logLevel = validLogLevels.includes(configuredLogLevel as (typeof validLogLevels)[number])
+    ? (configuredLogLevel as (typeof validLogLevels)[number])
+    : 'log';
+
   const logger = new Logger('Bootstrap');
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: [logLevel],
+  });
 
   app.enableCors({
     origin: process.env.CORS_ORIGIN?.split(',') ?? 'http://localhost:5173',
