@@ -25,7 +25,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const errorMessage = exception instanceof Error ? exception.message : String(exception);
     const stack = status >= 500 && exception instanceof Error ? exception.stack : undefined;
 
-    this.logger.error(`${req.method} ${req.originalUrl} ${status} - ${errorMessage}`, stack);
+    this.logger.error(
+      JSON.stringify({
+        method: req.method,
+        path: req.originalUrl,
+        statusCode: status,
+        message: errorMessage,
+        timestamp: new Date().toISOString(),
+      }),
+      stack,
+    );
 
     const now = new Date();
 
